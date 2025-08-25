@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Api</title>
+    <meta title="JSON API - Learn">
+    <meta description = "Website construído para estudo de consumo de api, uso de métodos, e tratativas de retornos">
+    <meta robots = "index,follow">
+     
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+      <div class="container">
+        <!-- Seleção de rota -->
+        <label for="routes">Escolha uma rota da API</label>
+        <select id="routes" name="routes">
+            <option value="posts">Posts</option>
+            <option value="comments">Comentários</option>
+            <option value="photos">Fotos</option>
+        </select>
+
+        <!-- Botões de busca -->
+        <div class="actions">
+            <button id="searchAll">Buscar todos</button>
+            <input type="text" id="inputId" placeholder="Digite o ID">
+            <button id="searchId">Buscar ID</button>
+        </div>
+
+        <!-- Área dinâmica para resposta da API -->
+        <div id="response-container">
+            <!-- Respostas individuais vão ser inseridas aqui via JS -->
+             
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
