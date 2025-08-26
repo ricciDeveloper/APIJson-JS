@@ -27,7 +27,39 @@ async function renderPosts() {
 }
 
 
-botao = document.querySelector("button");
-botao.addEventListener("click", () =>{
-    renderPosts();
-})
+async function getAllComments() {
+    const api = await fetch("https://jsonplaceholder.typicode.com/comments");
+    const data = await api.json();
+
+    const response = data.slice(0,10).map(comments =>({
+        name:comments.name,
+        email:comments.email,
+        body:comments.body
+    }));
+    return response
+}
+
+
+async function renderComments() {
+    const commentsContainer = document.getElementById("response-container");
+    const comments = await getAllComments();
+
+    comments.forEach(comments => {
+        const commentsElement = document.createElement("div");
+        commentsElement.innerHTML = `
+            <h2>${comments.title}</h2>
+            <p>${comments.email}</p>
+            <p>${comments.body}</p>
+            <hr>
+        `;
+        commentsContainer.appendChild(commentsElement);
+    });
+}
+
+
+// botao = document.querySelector("button");
+// botao.addEventListener("click", () =>{
+//     renderComments();
+// })
+
+
