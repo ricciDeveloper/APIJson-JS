@@ -13,7 +13,10 @@ async function getAllPosts() {
 
 async function renderPosts() {
     const postContainer = document.getElementById("response-container");
+    renderPosts.innerHTML = ""; // limpa antes de renderizar
+    
     const posts = await getAllPosts();
+    
 
     posts.forEach(posts => {
         const postElement = document.createElement("div");
@@ -42,6 +45,7 @@ async function getAllComments() {
 
 async function renderComments() {
     const commentsContainer = document.getElementById("response-container");
+    commentsContainer.innerHTML = ""; // limpa antes de renderizar
     const comments = await getAllComments();
 
     comments.forEach(comments => {
@@ -55,6 +59,45 @@ async function renderComments() {
         commentsContainer.appendChild(commentsElement);
     });
 }
+async function getAllUsers() {
+    const api = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await api.json();
+
+    const response = data.slice(0,10).map(users =>({
+        name:users.name,
+        username:users.username,
+        email:users.email,
+        address:users.address,
+        phone:users.phone,
+        website:users.website
+    }));
+    return response
+}
+
+
+async function renderUsers() {
+    const usersContainer = document.getElementById("response-container");
+    usersContainer.innerHTML = ""; // limpa antes de renderizar
+
+    const users = await getAllUsers();
+
+    users.forEach(user => {
+        const userElement = document.createElement("div");
+        userElement.innerHTML = `
+           <h2>${user.name} (@${user.username})</h2>
+            <p><strong>Email:</strong> ${user.email}</p>
+            <p><strong>Telefone:</strong> ${user.phone}</p>
+            <p><strong>Website:</strong> <a href="http://${user.website}" target="_blank">${user.website}</a></p>
+            <p><strong>Endereço:</strong> 
+            ${user.address.street}, ${user.address.suite}, 
+            ${user.address.city} - ${user.address.zipcode}
+            </p>
+            <hr>
+        `;
+        usersContainer.appendChild(userElement);
+    });
+}
+
 
 
 // botao = document.querySelector("button");
@@ -62,4 +105,33 @@ async function renderComments() {
 //     renderComments();
 // })
 
+let opcoes = document.querySelector("select");
+let button = document.querySelector("button");
 
+
+button.addEventListener("click", () => {
+    let valorSelecionado = opcoes.value;
+
+    seletor();
+});
+
+
+async function seletor(){
+    let valorSelecionado = opcoes.value;
+        switch (valorSelecionado) {
+        case "posts":
+            renderPosts();
+            break;
+
+        case "comments":
+            renderComments();
+            break;
+
+        case "users":
+            renderUsers();
+            break;
+
+        default:
+            console.log("azedou")
+    }
+}
