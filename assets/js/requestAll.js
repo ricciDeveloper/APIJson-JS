@@ -51,7 +51,7 @@ async function renderComments() {
     comments.forEach(comments => {
         const commentsElement = document.createElement("div");
         commentsElement.innerHTML = `
-            <h2>${comments.title}</h2>
+            <h2>${comments.name}</h2>
             <p>${comments.email}</p>
             <p>${comments.body}</p>
             <hr>
@@ -135,3 +135,6 @@ async function seletor(){
             console.log("azedou")
     }
 }
+
+
+
